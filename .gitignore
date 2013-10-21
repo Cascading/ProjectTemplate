@@ -1,0 +1,13 @@
+junitvm*.properties
+build.properties
+gradle.properties
+.DS_Store
+lib
+build
+dist
+out
+javadoc
+*.tmproj
+.idea
+*.iml
+.gradle
