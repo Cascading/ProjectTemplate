@@ -1,0 +1,70 @@
+/*
+ *
+ */
+
+import java.text.SimpleDateFormat
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+ext.cascadingVersion = '2.2.+'
+ext.hadoopVersion = '1.1.2'
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  mavenRepo name: 'conjars', url: 'http://conjars.org/repo/'
+}
+
+dependencies {
+  compile group: 'cascading', name: 'cascading-core', version: cascadingVersion
+//  compile group: 'cascading', name: 'cascading-xml', version: cascadingVersion // not required
+  compile group: 'cascading', name: 'cascading-hadoop', version: cascadingVersion
+
+  // these runtime deps allow the sample app to be run in an ide
+
+  runtime group: 'org.slf4j', name: 'slf4j-api', version: '1.6.1'
+  runtime group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.6.1'
+
+  // hadoop deps
+  runtime( group: 'org.apache.hadoop', name: 'hadoop-core', version: hadoopVersion ) {
+    exclude group: 'ant'
+    exclude group: 'junit'
+  }
+
+  runtime group: 'org.apache.hadoop', name: 'hadoop-test', version: hadoopVersion
+  runtime group: 'commons-io', name: 'commons-io', version: '2.1'
+
+  runtime group: 'javax.ws.rs', name: 'jsr311-api', version: '1.1.1'
+}
+
+jar {
+  description = "Assembles a Hadoop ready jar file"
+  doFirst {
+    into( 'lib' ) {
+      from configurations.compile
+    }
+  }
+
+  manifest {
+    attributes( "Main-Class": "cascading/project//Main" )
+  }
+}
+
+task distCopy( type: Copy, dependsOn: jar ) {
+
+  into "${buildDir}/dist/${archivesBaseName}"
+
+  from 'README.TXT'
+  from 'build.gradle'
+  from( 'src' ) { into 'src' }
+}
+
+task dist( type: Tar, dependsOn: distCopy ) {
+
+  compression = "GZIP"
+  classifier = new SimpleDateFormat( "yyyyMMdd" ).format( new Date() )
+
+  from "${buildDir}/dist/"
+}
