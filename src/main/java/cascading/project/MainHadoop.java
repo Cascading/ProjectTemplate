@@ -19,7 +19,7 @@ import cascading.tap.hadoop.Hfs;
  * <p/>
  * It assumes the input files are TSV with headers on the first line.
  */
-public class Main
+public class MainHadoop
   {
   public static void main( String[] args )
     {
@@ -27,7 +27,7 @@ public class Main
     String outPath = args[ 1 ];
 
     Properties properties = new Properties();
-    AppProps.setApplicationJarClass( properties, Main.class );
+    AppProps.setApplicationJarClass( properties, MainHadoop.class );
     HadoopFlowConnector flowConnector = new HadoopFlowConnector( properties );
 
     // create the source tap

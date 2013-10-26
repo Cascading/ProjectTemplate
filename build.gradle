@@ -20,6 +20,7 @@ repositories {
 dependencies {
   compile group: 'cascading', name: 'cascading-core', version: cascadingVersion
 //  compile group: 'cascading', name: 'cascading-xml', version: cascadingVersion // not required
+  compile group: 'cascading', name: 'cascading-local', version: cascadingVersion
   compile group: 'cascading', name: 'cascading-hadoop', version: cascadingVersion
 
   // these runtime deps allow the sample app to be run in an ide
