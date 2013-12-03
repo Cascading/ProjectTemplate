@@ -8,8 +8,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
-ext.cascadingVersion = '2.2.+'
-ext.hadoopVersion = '1.1.2'
+ext.cascadingVersion = '2.5.+'
+ext.hadoopVersion = '1.2.1'
 
 repositories {
   mavenLocal()
@@ -50,7 +50,7 @@ jar {
   }
 
   manifest {
-    attributes( "Main-Class": "cascading/project//Main" )
+    attributes( "Main-Class": "cascading/project/MainHadoop" )
   }
 }
 
