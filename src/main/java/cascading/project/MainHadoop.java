@@ -7,7 +7,7 @@ package cascading.project;
 import java.util.Properties;
 
 import cascading.flow.FlowDef;
-import cascading.flow.hadoop.HadoopFlowConnector;
+import cascading.flow.hadoop2.Hadoop2MR1FlowConnector;
 import cascading.pipe.Pipe;
 import cascading.property.AppProps;
 import cascading.scheme.hadoop.TextDelimited;
@@ -28,7 +28,7 @@ public class MainHadoop
 
     Properties properties = new Properties();
     AppProps.setApplicationJarClass( properties, MainHadoop.class );
-    HadoopFlowConnector flowConnector = new HadoopFlowConnector( properties );
+    Hadoop2MR1FlowConnector flowConnector = new Hadoop2MR1FlowConnector( properties );
 
     // create the source tap
     Tap inTap = new Hfs( new TextDelimited( true, "\t" ), inPath );

@@ -11,3 +11,5 @@ javadoc
 .idea
 *.iml
 .gradle
+*.ipr
+*.iws
